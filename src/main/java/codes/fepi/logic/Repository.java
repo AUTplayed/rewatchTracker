@@ -1,0 +1,49 @@
+package codes.fepi.logic;
+
+import codes.fepi.entity.Show;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class Repository {
+	private static Repository instance;
+	private long lastChanged = 0;
+
+	private List<Show> shows;
+
+	private Repository() {
+		shows = new CopyOnWriteArrayList<>();
+	}
+
+	public static Repository getInstance() {
+		if(instance == null) instance = new Repository();
+		return instance;
+	}
+
+	List<Show> getShows() {
+		return shows;
+	}
+
+	void setShows(List<Show> shows) {
+		this.shows = new CopyOnWriteArrayList<>(shows);
+	}
+
+	Show getShowByName(String name) {
+		Optional<Show> optionalShow = shows.stream().filter(show -> show.getName().equals(name)).findFirst();
+		return optionalShow.orElse(null);
+	}
+
+	public void updateEpisode(String showName, int episode) {
+		Show show = getShowByName(showName);
+		if(show == null) {
+			return;
+		}
+		show.setEpisode(episode);
+		lastChanged = System.currentTimeMillis();
+	}
+
+	long getLastChanged() {
+		return lastChanged;
+	}
+}

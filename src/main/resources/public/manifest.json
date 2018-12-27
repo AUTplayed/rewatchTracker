@@ -1,0 +1,15 @@
+{
+  "name": "RewatchTracker",
+  "short_name": "RwT",
+  "lang": "en",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#8a0e0e",
+  "icons": [
+    {
+      "src": "/img/icon.png",
+      "sizes": "30x30",
+      "type": "image/png"
+    }
+  ]
+}
