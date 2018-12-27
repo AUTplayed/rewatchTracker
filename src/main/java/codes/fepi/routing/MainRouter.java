@@ -1,6 +1,12 @@
 package codes.fepi.routing;
 
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
@@ -16,11 +22,18 @@ public class MainRouter {
 		path("/api", apiRouter::route);
 		path("/pages", pageRouter::route);
 		try {
-			// doing this here should keep the index file in memory for faster response (i think)
-			URI uri = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("public/index.html")).toURI();
-			byte[] bytes = Files.readAllBytes(Paths.get(uri));
+			// reading the index file to ram for fast access on requests falling through all other routes
+			InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("public/index.html");
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			byte[] data = new byte[8192];
+			int nRead;
+			while((nRead = is.read(data, 0, data.length)) != -1) {
+				buffer.write(data, 0, nRead);
+			}
+			byte[] bytes = buffer.toByteArray();
 			get("/:page", (req, res) -> bytes);
-		} catch (Exception ignored) {
+		} catch (Exception e) {
+			LoggerFactory.getLogger("router").error("load index error", e);
 		}
 	}
 
