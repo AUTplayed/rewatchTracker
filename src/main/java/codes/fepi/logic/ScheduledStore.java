@@ -18,6 +18,7 @@ public class ScheduledStore implements Runnable {
 		if(lastChanged > lastSaved) {
 			try {
 				mapper.writeValue(file, Repository.getInstance().getShows());
+				lastSaved = lastChanged;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
