@@ -3,7 +3,7 @@ var $ = document.querySelector.bind(document);
 
 async function swRegister() {
 	if ('serviceWorker' in navigator) {
-		let serviceWorker = await navigator.serviceWorker.register('/scripts/sw.js');
+		let serviceWorker = await navigator.serviceWorker.register('/sw.js');
 	}
 };
 

@@ -17,10 +17,13 @@ this.addEventListener('fetch', event => {
 		const cachedResponse = await caches.match(event.request);
 		if (cachedResponse) {
 			//Return the cached response if present
-			return cachedResponse
+			return cachedResponse;
 		}
 		//Get the network response if no cached response is present
-		const netResponse = await fetch(event.request)
-		return netResponse
+		const netResponse = await fetch(event.request);
+		let cache = await caches.open(CACHE_NAME);
+		//We must provide a clone of the response here
+		cache.put(event.request, netResponse.clone());
+		return netResponse;
 	})
 })
