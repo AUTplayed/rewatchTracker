@@ -12,9 +12,6 @@
 	align-items: center;
 }
 
-/**
-	bl = border link tag
-**/
 .bl {
 	width: fit-content;
     padding: 10 40 10 40;
@@ -22,3 +19,6 @@
     color: black;
     text-decoration: none;
 }
+/**
+	bl = border link tag
+**/
