@@ -1,4 +1,3 @@
-window.addEventListener('beforeinstallprompt', (e) => e.prompt());
 var $ = document.querySelector.bind(document);
 
 async function swRegister() {
