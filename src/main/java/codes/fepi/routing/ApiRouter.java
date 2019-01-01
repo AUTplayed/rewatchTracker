@@ -10,9 +10,9 @@ class ApiRouter {
 
 	void route() {
 		ObjectMapper mapper = new ObjectMapper();
-		post("/ep", (req, res) -> {
+		post("/show", (req, res) -> {
 			Show show = mapper.readValue(req.bodyAsBytes(), Show.class);
-			Repository.getInstance().updateEpisode(show.getName(), show.getEpisode());
+			Repository.getInstance().updateShow(show);
 			return "success";
 		});
 	}

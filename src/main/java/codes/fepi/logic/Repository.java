@@ -34,12 +34,13 @@ public class Repository {
 		return optionalShow.orElse(null);
 	}
 
-	public void updateEpisode(String showName, int episode) {
-		Show show = getShowByName(showName);
+	public void updateShow(Show updatedShow) {
+		Show show = getShowByName(updatedShow.getName());
 		if(show == null) {
 			return;
 		}
-		show.setEpisode(episode);
+		show.setEpisode(updatedShow.getEpisode());
+		show.setNotes(updatedShow.getNotes());
 		lastChanged = System.currentTimeMillis();
 	}
 

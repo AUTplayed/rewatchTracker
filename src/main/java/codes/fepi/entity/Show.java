@@ -3,6 +3,7 @@ package codes.fepi.entity;
 public class Show {
 	private String name;
 	private int episode;
+	private String notes;
 
 	public Show() {
 	}
@@ -10,6 +11,12 @@ public class Show {
 	public Show(String name, int episode) {
 		this.name = name;
 		this.episode = episode;
+	}
+
+	public Show(String name, int episode, String notes) {
+		this.name = name;
+		this.episode = episode;
+		this.notes = notes;
 	}
 
 	public String getName() {
@@ -26,5 +33,13 @@ public class Show {
 
 	public void setEpisode(int episode) {
 		this.episode = episode;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 }
