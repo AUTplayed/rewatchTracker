@@ -37,6 +37,7 @@ public class Repository {
 	public void updateShow(Show updatedShow) {
 		Show show = getShowByName(updatedShow.getName());
 		if(show == null) {
+			shows.add(updatedShow);
 			return;
 		}
 		show.setEpisode(updatedShow.getEpisode());

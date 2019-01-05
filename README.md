@@ -13,9 +13,3 @@ the reason I use this to track my rewatch progress and not the site where I'm wa
 deploying is really easy, just execute the fatJar gradle task and then deploy the jar from build/libs/rewatchTracker-fat-1.0.jar
 
 the application will create a store.json file in the working directory which retains the persisted shows (autosaves every hour)
-
-## todo
-
-- show creation menu
-
-currently you have to edit the json and the restart the app to add a new show

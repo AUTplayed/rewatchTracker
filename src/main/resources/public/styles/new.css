@@ -1,0 +1,16 @@
+#newContainer {
+	flex-direction: column;
+	align-items: center;
+}
+
+.el {
+	margin: 5px
+}
+
+#create {
+	cursor: pointer;
+}
+
+#name {
+	text-align: center;
+}

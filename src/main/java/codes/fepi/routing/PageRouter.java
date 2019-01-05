@@ -22,6 +22,7 @@ class PageRouter {
 		PageHandler handler = new PageHandler();
 		page("index", handler::index);
 		page("show", handler::show);
+		page("new", handler::non);
 	}
 
 	private void page(String page, Function<Request, Object> handler) {
