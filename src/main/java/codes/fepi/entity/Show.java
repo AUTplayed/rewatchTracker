@@ -1,9 +1,12 @@
 package codes.fepi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Show {
 	private String name;
 	private int episode;
 	private String notes;
+	private String urlPattern;
 
 	public Show() {
 	}
@@ -41,5 +44,21 @@ public class Show {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+
+	public String getUrlPattern() {
+		return urlPattern;
+	}
+
+	public void setUrlPattern(String urlPattern) {
+		this.urlPattern = urlPattern;
+	}
+
+	@JsonIgnore
+	public String getWatchUrl() {
+		if(urlPattern == null) {
+			return null;
+		}
+		return String.format(urlPattern, getEpisode());
 	}
 }

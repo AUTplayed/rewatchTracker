@@ -1,22 +1,24 @@
 package codes.fepi.logic;
 
 import codes.fepi.entity.Show;
-import codes.fepi.model.IndexModel;
+import codes.fepi.model.ShowIndexDto;
 import spark.Request;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@codes.fepi.ldfspark.PageHandler
 public class PageHandler {
-	public Object non(Request req) {
+	public static Object create(Request req) {
 		return null;
 	}
 
-	public Object index(Request req) {
+	public static Object index(Request req) {
 		List<Show> shows = Repository.getInstance().getShows();
-		return new IndexModel(shows);
+		return shows.stream().map(ShowIndexDto::new).collect(Collectors.toList());
 	}
 
-	public Object show(Request req) {
+	public static Object show(Request req) {
 		return Repository.getInstance().getShowByName(req.queryParams("name"));
 	}
 }

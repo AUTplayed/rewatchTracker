@@ -4,5 +4,16 @@
 }
 
 .show {
+	color: black;
+	text-decoration: none;
+	padding: 10 0 10 40;
+}
+
+.watch {
+	padding: 10 12 10 12;
+}
+
+.showWrap {
 	margin: 5;
+	padding: 0;
 }

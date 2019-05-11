@@ -42,6 +42,7 @@ public class Repository {
 		}
 		show.setEpisode(updatedShow.getEpisode());
 		show.setNotes(updatedShow.getNotes());
+		show.setUrlPattern(updatedShow.getUrlPattern());
 		lastChanged = System.currentTimeMillis();
 	}
 

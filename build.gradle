@@ -12,9 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile "com.sparkjava:spark-core:2.7.2"
-    compile "com.sparkjava:spark-template-mustache:2.7.1"
-    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+    compile group: 'codes.fepi', name: 'ldfSpark', version: '1.0'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
 }
 
