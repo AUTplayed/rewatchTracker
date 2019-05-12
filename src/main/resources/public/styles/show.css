@@ -24,14 +24,19 @@
 }
 
 #urlPattern {
-	width: 15vw;
+	align-self: stretch;
+	width: auto;
 }
 
 #notes {
-	width: 15vw;
+	align-self: stretch;
+    width: auto;
+    margin: 0 10 0 10;
 }
 
 #navContainer {
 	justify-content: space-between;
-	width: 15vw;
+	align-self: stretch;
+    width: auto;
+    margin: 0 10 0 10;
 }

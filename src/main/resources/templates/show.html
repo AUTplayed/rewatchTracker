@@ -8,10 +8,8 @@
 		<a href="javascript:void(0)" id="add" class="bl op">+</a>
 	</div>
 	<div>watch url pattern:</div>
-	<input id="urlPattern" class="op bl" type="text" placeholder="http://watch?episode=%d" value="{{urlPattern}}">
-	<div>
-		<textarea class="bl" rows="8" id="notes" placeholder="notes">{{notes}}</textarea>
-	</div>
+	<input id="urlPattern" class="op bl" type="text" placeholder="http://watch/%s/?episode=%d" value="{{urlPattern}}">
+	<textarea class="bl" rows="8" id="notes" placeholder="notes">{{notes}}</textarea>
 	<div class="container" id="navContainer">
 		<a id="back" class="bl nav" href="/"><</a>
 		<a id="delete" class="bl nav" href="javascript:void(0)">delete</a>

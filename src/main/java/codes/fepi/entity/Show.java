@@ -61,7 +61,7 @@ public class Show {
 		if(urlPattern == null) {
 			return null;
 		}
-		return String.format(urlPattern, getEpisode());
+		return String.format(urlPattern, getEpisode(), getNotes());
 	}
 
 	@Override
