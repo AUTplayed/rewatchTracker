@@ -27,6 +27,10 @@
 	width: 15vw;
 }
 
+#notes {
+	width: 15vw;
+}
+
 #navContainer {
 	justify-content: space-between;
 	width: 15vw;
