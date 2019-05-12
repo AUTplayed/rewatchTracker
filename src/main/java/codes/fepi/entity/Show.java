@@ -2,6 +2,7 @@ package codes.fepi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.IllegalFormatException;
 import java.util.Objects;
 
 public class Show {
@@ -58,10 +59,19 @@ public class Show {
 
 	@JsonIgnore
 	public String getWatchUrl() {
-		if(urlPattern == null) {
+		if (urlPattern == null) {
 			return null;
 		}
-		return String.format(urlPattern, getEpisode(), getNotes());
+		final int notesIndex = urlPattern.indexOf("%s");
+		final int epIndex = urlPattern.indexOf("%d");
+		try {
+			if ((epIndex < notesIndex && epIndex != -1) || notesIndex == -1 && epIndex != -1) {
+				return String.format(urlPattern, getEpisode(), getNotes());
+			}
+			return String.format(urlPattern, getNotes(), getEpisode());
+		} catch (IllegalFormatException e) {
+			return "javascript:alert('invalid watchUrl format: " + e.getMessage() + "')";
+		}
 	}
 
 	@Override
