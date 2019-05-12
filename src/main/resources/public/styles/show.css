@@ -7,12 +7,12 @@
 	font-size: 20px;
 }
 
-#back {
-	margin: 10;
-}
-
 .op {
     margin: 10;
+}
+
+.nav {
+	margin: 10 0 10 0;
 }
 
 #ep {
@@ -24,5 +24,10 @@
 }
 
 #urlPattern {
+	width: 15vw;
+}
+
+#navContainer {
+	justify-content: space-between;
 	width: 15vw;
 }

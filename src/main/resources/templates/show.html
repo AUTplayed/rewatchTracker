@@ -3,14 +3,17 @@
 <div class="container" id="controlContainer">
 	<div id="name">{{name}}</div>
 	<div class="container">
-		<a href="javascript:void()" id="sub" class="bl op">-</a>
+		<a href="javascript:void(0)" id="sub" class="bl op">-</a>
 		<input id="ep" class="bl" autocomplete="off" value="{{episode}}">
-		<a href="javascript:void()" id="add" class="bl op">+</a>
+		<a href="javascript:void(0)" id="add" class="bl op">+</a>
 	</div>
 	<div>watch url pattern:</div>
 	<input id="urlPattern" class="op bl" type="text" placeholder="http://watch?episode=%d" value="{{urlPattern}}">
 	<div>
 		<textarea class="bl" rows="8" id="notes" placeholder="notes">{{notes}}</textarea>
 	</div>
-	<a id="back" class="bl" href="/"><</a>
+	<div class="container" id="navContainer">
+		<a id="back" class="bl nav" href="/"><</a>
+		<a id="delete" class="bl nav" href="javascript:void(0)">delete</a>
+	</div>
 </div>

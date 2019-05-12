@@ -38,15 +38,26 @@ public class Repository {
 		Show show = getShowByName(updatedShow.getName());
 		if(show == null) {
 			shows.add(updatedShow);
+			touched();
 			return;
 		}
 		show.setEpisode(updatedShow.getEpisode());
 		show.setNotes(updatedShow.getNotes());
 		show.setUrlPattern(updatedShow.getUrlPattern());
-		lastChanged = System.currentTimeMillis();
+		touched();
+	}
+
+	public void deleteShow(Show show) {
+		shows.remove(show);
+		touched();
 	}
 
 	long getLastChanged() {
 		return lastChanged;
 	}
+
+	private void touched() {
+		lastChanged = System.currentTimeMillis();
+	}
+
 }

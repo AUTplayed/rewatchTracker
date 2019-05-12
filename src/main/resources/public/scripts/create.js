@@ -1,8 +1,8 @@
 function add() {
 	fetch("/api/show", { method: "POST", body: JSON.stringify({ name: $("#name").value, episode: 0 }) })
-		.then( (res)=>{
+		.then((res)=>{
 			if(res.ok) {
-				res.ldf.nav("/")
+				ldf.nav("/")
 			} else {
 				console.log(res.error())
 			}
