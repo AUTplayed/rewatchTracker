@@ -65,7 +65,7 @@ public class Show {
 		final int notesIndex = urlPattern.indexOf("%s");
 		final int epIndex = urlPattern.indexOf("%d");
 		try {
-			if ((epIndex < notesIndex && epIndex != -1) || notesIndex == -1 && epIndex != -1) {
+			if ((epIndex < notesIndex && epIndex != -1) || notesIndex == -1) {
 				return String.format(urlPattern, getEpisode(), getNotes());
 			}
 			return String.format(urlPattern, getNotes(), getEpisode());
