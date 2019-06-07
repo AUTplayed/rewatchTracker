@@ -7,9 +7,13 @@
 	justify-content: center;
 }
 
-#centerContainer {
+.centerContainer {
 	flex-direction: column;
 	align-items: center;
+}
+
+.el {
+	margin: 5px
 }
 
 .bl {

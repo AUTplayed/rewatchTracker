@@ -1,8 +1,3 @@
-#showContainer {
-	flex-direction: column;
-	align-items: center;
-}
-
 .show {
 	color: black;
 	text-decoration: none;
@@ -16,4 +11,8 @@
 .showWrap {
 	margin: 5;
 	padding: 0;
+}
+
+#search {
+	text-align: center;
 }

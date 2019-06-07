@@ -6,6 +6,7 @@ import spark.Request;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @codes.fepi.ldfspark.PageHandler
 public class PageHandler {
@@ -13,9 +14,18 @@ public class PageHandler {
 		return null;
 	}
 
-	public static Object index(Request req) {
+	public static Object index() {
+		return null;
+	}
+
+	public static Object shows(Request req) {
+		String searchString = req.queryParams("search");
 		List<Show> shows = Repository.getInstance().getShows();
-		return shows.stream().map(ShowIndexDto::new).collect(Collectors.toList());
+		Stream<Show> stream = shows.stream();
+		if(searchString != null) {
+			stream = stream.filter(show -> show.getName().toLowerCase().contains(searchString.toLowerCase()));
+		}
+		return stream.map(ShowIndexDto::new).collect(Collectors.toList());
 	}
 
 	public static Object show(Request req) {

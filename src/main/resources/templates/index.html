@@ -1,12 +1,9 @@
+<script src="/scripts/index.js"></script>
 <link rel="stylesheet" href="/styles/index.css">
-<div class="container" id="showContainer">
-	{{#.}}
-	<div class="bl showWrap container">
-		<a class="show" href="show?name={{name}}">{{name}} - {{episode}}</a>
-		<a class="watch" {{#watchUrl}} href="{{watchUrl}}" {{/watchUrl}}>
-			<img {{#watchUrl}} src="/img/externalLinkIcon.png" {{/watchUrl}} width="16" height="16">
-		</a>
-	</div>
-	{{/.}}
+<input class="bl el" id="search" type="text" placeholder="search" autocomplete="off" autofocus>
+<div class="container centerContainer" id="shows">
+
+</div>
+<div class="container centerContainer">
 	<a class="bl" style="margin: 5" href="create">+</a>
 </div>
