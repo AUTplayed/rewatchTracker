@@ -17,7 +17,7 @@ public class Repository {
 	}
 
 	public static Repository getInstance() {
-		if(instance == null) instance = new Repository();
+		if (instance == null) instance = new Repository();
 		return instance;
 	}
 
@@ -36,7 +36,7 @@ public class Repository {
 
 	public void updateShow(Show updatedShow) {
 		Show show = getShowByName(updatedShow.getName());
-		if(show == null) {
+		if (show == null) {
 			shows.add(updatedShow);
 			touched();
 			return;
@@ -44,6 +44,7 @@ public class Repository {
 		show.setEpisode(updatedShow.getEpisode());
 		show.setNotes(updatedShow.getNotes());
 		show.setUrlPattern(updatedShow.getUrlPattern());
+		show.touch();
 		touched();
 	}
 

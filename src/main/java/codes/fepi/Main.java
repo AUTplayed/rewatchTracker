@@ -18,6 +18,6 @@ public class Main {
 		ScheduledStore scheduledStore = new ScheduledStore();
 		scheduledStore.load();
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.scheduleAtFixedRate(scheduledStore, 1, 1, TimeUnit.HOURS);
+		scheduler.scheduleAtFixedRate(scheduledStore, 1, 10, TimeUnit.MINUTES);
 	}
 }

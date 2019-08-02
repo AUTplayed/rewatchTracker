@@ -25,7 +25,9 @@ public class PageHandler {
 		if(searchString != null) {
 			stream = stream.filter(show -> show.getName().toLowerCase().contains(searchString.toLowerCase()));
 		}
-		return stream.map(ShowIndexDto::new).collect(Collectors.toList());
+		return stream.sorted()
+				.map(ShowIndexDto::new)
+				.collect(Collectors.toList());
 	}
 
 	public static Object show(Request req) {

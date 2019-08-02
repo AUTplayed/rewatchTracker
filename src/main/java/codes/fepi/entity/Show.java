@@ -1,17 +1,22 @@
 package codes.fepi.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.IllegalFormatException;
 import java.util.Objects;
 
-public class Show {
-	private String name;
+public class Show implements Comparable {
+	private final String name;
 	private int episode;
 	private String notes;
 	private String urlPattern;
+	private long lastModified;
 
-	public Show() {
+	@JsonCreator
+	public Show(@JsonProperty(value = "name") String name) {
+		this.name = name;
 	}
 
 	public Show(String name, int episode) {
@@ -27,10 +32,6 @@ public class Show {
 
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public int getEpisode() {
@@ -57,6 +58,18 @@ public class Show {
 		this.urlPattern = urlPattern;
 	}
 
+	public long getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(long lastModified) {
+		this.lastModified = lastModified;
+	}
+
+	public void touch() {
+		this.lastModified = System.currentTimeMillis();
+	}
+
 	@JsonIgnore
 	public String getWatchUrl() {
 		if (urlPattern == null) {
@@ -80,5 +93,11 @@ public class Show {
 		if (o == null || getClass() != o.getClass()) return false;
 		Show show = (Show) o;
 		return Objects.equals(name, show.name);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		final Show show = (Show) o;
+		return (int) (show.lastModified - this.lastModified);
 	}
 }
