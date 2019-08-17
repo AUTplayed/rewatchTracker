@@ -8,6 +8,10 @@ This is a quick program i put together to
 
 the reason I use this to track my rewatch progress and not the site where I'm watching is that I don't want to change my "finished" status on that show on the site
 
+![overview](https://i.imgur.com/sbpIaQr.png)
+
+![detail](https://i.imgur.com/LksHZrv.png)
+
 ## deploying
 
 deploying is really easy, just execute the fatJar gradle task and then deploy the jar from build/libs/rewatchTracker-fat-1.0.jar
