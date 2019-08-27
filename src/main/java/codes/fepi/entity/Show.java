@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.IllegalFormatException;
 import java.util.Objects;
 
-public class Show implements Comparable {
+public class Show implements Comparable<Show> {
 	private final String name;
 	private int episode;
 	private String notes;
@@ -96,8 +96,7 @@ public class Show implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		final Show show = (Show) o;
-		return (int) (show.lastModified - this.lastModified);
+	public int compareTo(Show o) {
+		return Long.compare(this.lastModified, o.getLastModified());
 	}
 }
