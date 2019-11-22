@@ -97,6 +97,6 @@ public class Show implements Comparable<Show> {
 
 	@Override
 	public int compareTo(Show o) {
-		return Long.compare(this.lastModified, o.getLastModified());
+		return Long.compare(o.getLastModified(), this.lastModified);
 	}
 }
