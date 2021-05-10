@@ -7,3 +7,4 @@ async function swRegister() {
 };
 
 swRegister();
+new Darkmode().showWidget();
