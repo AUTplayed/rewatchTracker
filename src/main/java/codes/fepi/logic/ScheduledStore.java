@@ -16,6 +16,7 @@ public class ScheduledStore implements Runnable {
 	private final File file = Paths.get(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent().resolve("store.json").toFile();
 
 	public ScheduledStore() throws URISyntaxException {
+		System.out.println("Storing to " + file.getAbsolutePath());
 	}
 
 	@Override
