@@ -15,18 +15,17 @@ public class Show implements Comparable<Show> {
 	private long lastModified;
 
 	@JsonCreator
-	public Show(@JsonProperty(value = "name") String name) {
-		this.name = name;
+	public Show(@JsonProperty(value = "name") final String name) {
+		this.name = Objects.requireNonNull(name);
 	}
 
-	public Show(String name, int episode) {
-		this.name = name;
+	public Show(final String name, final int episode) {
+		this(name);
 		this.episode = episode;
 	}
 
-	public Show(String name, int episode, String notes) {
-		this.name = name;
-		this.episode = episode;
+	public Show(final String name, final int episode, final String notes) {
+		this(name, episode);
 		this.notes = notes;
 	}
 

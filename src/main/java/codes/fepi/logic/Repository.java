@@ -2,42 +2,55 @@ package codes.fepi.logic;
 
 import codes.fepi.entity.Show;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class Repository {
-	private static Repository instance;
-	private long lastChanged = 0;
+public enum Repository {
+	INSTANCE;
 
-	private List<Show> shows;
+	private Map<String, List<Show>> shows;
 
-	private Repository() {
-		shows = new CopyOnWriteArrayList<>();
+	Repository() {
+		shows = new ConcurrentHashMap<>();
 	}
 
 	public static Repository getInstance() {
-		if (instance == null) instance = new Repository();
-		return instance;
+		return INSTANCE;
 	}
 
-	List<Show> getShows() {
-		return shows;
+	List<Show> getShows(final String userId) {
+		final List<Show> userShows = this.shows.get(userId);
+		return userShows != null ? userShows : Collections.emptyList();
 	}
 
-	void setShows(List<Show> shows) {
-		this.shows = new CopyOnWriteArrayList<>(shows);
+	Map<String, List<Show>> getAllShows() {
+		return new HashMap<>(shows);
 	}
 
-	Show getShowByName(String name) {
-		Optional<Show> optionalShow = shows.stream().filter(show -> show.getName().equals(name)).findFirst();
+	void setShows(Map<String, List<Show>> shows) {
+		this.shows = new ConcurrentHashMap<>(shows);
+	}
+
+	Show getShowByName(final String userId, final String name) {
+		final List<Show> userShows = this.shows.get(userId);
+		if (userShows == null || userShows.isEmpty()) {
+			return null;
+		}
+		final Optional<Show> optionalShow = userShows.stream()
+				.filter(show -> show.getName().equals(name))
+				.findFirst();
 		return optionalShow.orElse(null);
 	}
 
-	public void updateShow(Show updatedShow) {
-		Show show = getShowByName(updatedShow.getName());
+	private void addShow(final String userId, final Show newShow) {
+		final List<Show> userShows = this.shows.computeIfAbsent(userId, id -> new ArrayList<>());
+		userShows.add(newShow);
+	}
+
+	public void updateShow(final String userId, final Show updatedShow) {
+		final Show show = getShowByName(userId, updatedShow.getName());
 		if (show == null) {
-			shows.add(updatedShow);
+			addShow(userId, updatedShow);
 			touched();
 			return;
 		}
@@ -48,17 +61,17 @@ public class Repository {
 		touched();
 	}
 
-	public void deleteShow(Show show) {
-		shows.remove(show);
+	public void deleteShow(final String userId, final Show show) {
+		final List<Show> userShows = this.shows.get(userId);
+		if (userShows == null || userShows.isEmpty()) {
+			return;
+		}
+		userShows.remove(show);
 		touched();
 	}
 
-	long getLastChanged() {
-		return lastChanged;
-	}
-
 	private void touched() {
-		lastChanged = System.currentTimeMillis();
+		ActivityTracker.INSTANCE.changed();
 	}
 
 }

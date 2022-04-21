@@ -11,12 +11,14 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 	public static void main(String[] args) throws URISyntaxException {
+		ScheduledStore scheduledStore = new ScheduledStore();
+		scheduledStore.load();
+
 		MainRouter mainRouter = new MainRouter();
 		mainRouter.init();
 		LdfSpark.start();
 		mainRouter.route();
-		ScheduledStore scheduledStore = new ScheduledStore();
-		scheduledStore.load();
+
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 		scheduler.scheduleAtFixedRate(scheduledStore, 1, 10, TimeUnit.MINUTES);
 	}

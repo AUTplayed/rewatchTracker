@@ -12,6 +12,22 @@
 	align-items: center;
 }
 
+.endContainer {
+    flex-direction: column;
+	align-items: end;
+	height: 3vh;
+}
+
+#userBox {
+    width: 150px;
+    padding-right: 2vw;
+    user-select: none;
+}
+
+#userBox > input {
+    width: -webkit-fill-available;
+}
+
 .el {
 	margin: 5px
 }

@@ -1,7 +1,7 @@
 package codes.fepi.logic;
 
 import codes.fepi.Main;
-import codes.fepi.entity.Show;
+import codes.fepi.entity.DataStore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -10,10 +10,8 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.List;
 
 public class ScheduledStore implements Runnable {
-	private long lastSaved = 0;
 	private final ObjectMapper mapper = new ObjectMapper();
 	private final File file = Paths.get(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent().resolve("store.json").toFile();
 
@@ -22,11 +20,10 @@ public class ScheduledStore implements Runnable {
 
 	@Override
 	public void run() {
-		long lastChanged = Repository.getInstance().getLastChanged();
-		if (lastChanged > lastSaved) {
+		if (ActivityTracker.INSTANCE.hasChanges()) {
 			try {
-				mapper.writeValue(file, Repository.getInstance().getShows());
-				lastSaved = lastChanged;
+				final DataStore store = StorageFactory.createDataStore();
+				mapper.writeValue(file, store);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -36,10 +33,15 @@ public class ScheduledStore implements Runnable {
 	public void load() {
 		try {
 			if (!file.exists()) {
-				Files.write(file.toPath(), Collections.singletonList("[]"));
+				Files.write(file.toPath(), Collections.singletonList("{}"));
 			}
-			List<Show> shows = mapper.readValue(file, mapper.getTypeFactory().constructCollectionType(List.class, Show.class));
-			Repository.getInstance().setShows(shows);
+			final DataStore store = mapper.readValue(file, DataStore.class);
+			if (store.getShows() != null) {
+				Repository.getInstance().setShows(store.getShows());
+			}
+			if (store.getUsers() != null) {
+				UserManager.INSTANCE.setUsers(store.getUsers());
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
